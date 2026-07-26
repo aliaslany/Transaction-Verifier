@@ -1,0 +1,12 @@
+{
+  "name": "Transaction Verifier",
+  "description": "Local Iranian transaction receipt & SMS verification app with automated matching, Telegram API notifications, and monthly expense dashboard.",
+  "requestFramePermissions": [
+    "android.permission.RECEIVE_SMS",
+    "android.permission.READ_SMS"
+  ],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
+

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+    <!-- Card Base -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M24,34h60c4.42,0 8,3.58 8,8v24c0,4.42 -3.58,8 -8,8H24c-4.42,0 -8,-3.58 -8,-8V42c0,-4.42 3.58,-8 8,-8z" />
+    <!-- Magnetic Strip -->
+    <path
+        android:fillColor="#102A43"
+        android:pathData="M16,42h76v8H16z" />
+    <!-- Chip & Lines -->
+    <path
+        android:fillColor="#F6AD55"
+        android:pathData="M24,54h10v8H24z" />
+    <!-- Checkmark Badge -->
+    <path
+        android:fillColor="#38A169"
+        android:pathData="M72,56c5.52,0 10,4.48 10,10s-4.48,10 -10,10s-10,-4.48 -10,-10s4.48,-10 10,-10z" />
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M68,66l3,3 6,-6 -1.41,-1.41L71,66.17l-1.59,-1.58L68,66z" />
+</vector>
