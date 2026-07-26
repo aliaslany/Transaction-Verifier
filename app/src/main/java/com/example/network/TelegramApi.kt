@@ -1,5 +1,6 @@
 package com.example.network
 
+import com.squareup.moshi.JsonClass
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
@@ -10,7 +11,7 @@ import retrofit2.http.Path
 
 interface TelegramApiService {
     @FormUrlEncoded
-    @POST("bot{token}/sendMessage")
+    @POST("/bot{token}/sendMessage")
     suspend fun sendMessage(
         @Path("token") token: String,
         @Field("chat_id") chatId: String,
@@ -19,6 +20,7 @@ interface TelegramApiService {
     ): Response<TelegramResponse>
 }
 
+@JsonClass(generateAdapter = true)
 data class TelegramResponse(
     val ok: Boolean,
     val description: String? = null

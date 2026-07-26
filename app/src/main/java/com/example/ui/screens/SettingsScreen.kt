@@ -258,17 +258,6 @@ fun SettingsScreen(viewModel: MainViewModel) {
                         fontWeight = FontWeight.Bold
                     )
 
-                    Button(
-                        onClick = { viewModel.populateSampleData() },
-                        modifier = Modifier.fillMaxWidth(),
-                        colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.secondary),
-                        shape = RoundedCornerShape(10.dp)
-                    ) {
-                        Icon(Icons.Default.AutoAwesome, contentDescription = null)
-                        Spacer(modifier = Modifier.width(8.dp))
-                        Text("بارگذاری تراکنش‌های نمونه آزمایشی")
-                    }
-
                     OutlinedButton(
                         onClick = { showClearConfirm = true },
                         modifier = Modifier.fillMaxWidth(),

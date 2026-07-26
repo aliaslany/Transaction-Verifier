@@ -63,8 +63,6 @@ fun ApiAndTelegramScreen(viewModel: MainViewModel) {
     var inputChatId by remember(chatId) { mutableStateOf(chatId) }
     var inputEnabled by remember(telegramEnabled) { mutableStateOf(telegramEnabled) }
 
-    var simulatedLogs by remember { mutableStateOf("") }
-
     LazyColumn(
         modifier = Modifier
             .fillMaxSize()
@@ -275,70 +273,6 @@ fun ApiAndTelegramScreen(viewModel: MainViewModel) {
                                 """.trimIndent(),
                                 style = MaterialTheme.typography.bodySmall.copy(fontFamily = FontFamily.Monospace),
                                 color = MaterialTheme.colorScheme.primary
-                            )
-                        }
-                    }
-                }
-            }
-        }
-
-        // Live API Flow Simulator Button & Console
-        item {
-            Card(
-                modifier = Modifier.fillMaxWidth(),
-                shape = RoundedCornerShape(16.dp),
-                colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceVariant)
-            ) {
-                Column(modifier = Modifier.padding(16.dp)) {
-                    Text(
-                        text = "شبیه‌ساز تعاملی API محلی (تست یک‌کلیکی کامل)",
-                        style = MaterialTheme.typography.titleMedium,
-                        fontWeight = FontWeight.Bold
-                    )
-                    Spacer(modifier = Modifier.height(6.dp))
-                    Text(
-                        text = "برای اجرای یک سناریوی کامل (دریافت رسید + دریافت پیامک بانکی + تطابق خودکار + ارسال تلگرام) کلیک کنید:",
-                        style = MaterialTheme.typography.bodySmall,
-                        color = MaterialTheme.colorScheme.onSurfaceVariant
-                    )
-
-                    Spacer(modifier = Modifier.height(12.dp))
-
-                    Button(
-                        onClick = {
-                            val sampleReceipt = "رسید کارت به کارت آپ\nمبلغ: ۱۰,۰۰۰,۰۰۰ تومان\nکد رهگیری: 881023\nکارت مبدا: ۶۰۳۷****۵۵۴۴"
-                            val sampleSms = "واریز ۱۰۰,۰۰۰,۰۰۰ ریال به حساب ۶۱۰۴...۱۱۰۲ کد: 881023"
-
-                            simulatedLogs = "🚀 شروع شبیه‌سازی API محلی...\n" +
-                                    "1️⃣ دریافت رسید: ۱۰,۰۰۰,۰۰۰ تومان (کد: 881023)\n" +
-                                    "2️⃣ پردازش پیامک بانکی واریز..."
-
-                            viewModel.verifyReceiptText(sampleReceipt)
-                            viewModel.simulateBankSms(sampleSms, "6000123")
-
-                            simulatedLogs += "\n3️⃣ تطابق کامل انجام شد! ✅ (MATCHED)\n" +
-                                    "4️⃣ ارسال پیام خروجی به API تلگرام... 🟢"
-                        },
-                        modifier = Modifier.fillMaxWidth(),
-                        colors = ButtonDefaults.buttonColors(containerColor = EmeraldPrimary),
-                        shape = RoundedCornerShape(12.dp)
-                    ) {
-                        Icon(Icons.Default.PlayArrow, contentDescription = null)
-                        Spacer(modifier = Modifier.width(6.dp))
-                        Text("اجرای تست کامل چرخه API", fontWeight = FontWeight.Bold)
-                    }
-
-                    if (simulatedLogs.isNotBlank()) {
-                        Spacer(modifier = Modifier.height(12.dp))
-                        Card(
-                            modifier = Modifier.fillMaxWidth(),
-                            colors = CardDefaults.cardColors(containerColor = Color(0xFF0F172A))
-                        ) {
-                            Text(
-                                text = simulatedLogs,
-                                style = MaterialTheme.typography.bodySmall.copy(fontFamily = FontFamily.Monospace),
-                                color = Color(0xFF34D399),
-                                modifier = Modifier.padding(12.dp)
                             )
                         }
                     }

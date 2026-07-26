@@ -33,6 +33,7 @@ import androidx.compose.material.icons.filled.QrCodeScanner
 import androidx.compose.material.icons.filled.Receipt
 import androidx.compose.material.icons.filled.Send
 import androidx.compose.material.icons.filled.Settings
+import androidx.compose.material.icons.filled.Warning
 import androidx.compose.material3.Button
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
@@ -95,16 +96,20 @@ class MainActivity : ComponentActivity() {
 
         setContent {
             TransactionVerifierTheme {
-                val securityPin by viewModel.preferencesManager.securityPin.collectAsState()
-                var isUnlocked by remember { mutableStateOf(securityPin.isBlank()) }
+                androidx.compose.runtime.CompositionLocalProvider(
+                    androidx.compose.ui.platform.LocalLayoutDirection provides androidx.compose.ui.unit.LayoutDirection.Rtl
+                ) {
+                    val securityPin by viewModel.preferencesManager.securityPin.collectAsState()
+                    var isUnlocked by remember { mutableStateOf(securityPin.isBlank()) }
 
-                if (!isUnlocked && securityPin.isNotBlank()) {
-                    SecurityPinUnlockScreen(
-                        correctPin = securityPin,
-                        onUnlocked = { isUnlocked = true }
-                    )
-                } else {
-                    MainAppContent(viewModel = viewModel)
+                    if (!isUnlocked && securityPin.isNotBlank()) {
+                        SecurityPinUnlockScreen(
+                            correctPin = securityPin,
+                            onUnlocked = { isUnlocked = true }
+                        )
+                    } else {
+                        MainAppContent(viewModel = viewModel)
+                    }
                 }
             }
         }
@@ -244,7 +249,7 @@ fun MainAppContent(viewModel: MainViewModel) {
                                 modifier = Modifier.weight(1f)
                             ) {
                                 Icon(
-                                    imageVector = Icons.Default.CheckCircle,
+                                    imageVector = if (notif.isSuccess) Icons.Default.CheckCircle else Icons.Default.Warning,
                                     contentDescription = null,
                                     tint = Color.White,
                                     modifier = Modifier.size(24.dp)

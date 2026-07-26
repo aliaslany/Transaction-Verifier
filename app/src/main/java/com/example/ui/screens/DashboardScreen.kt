@@ -184,8 +184,7 @@ fun DashboardScreen(
         // Matching Rate & Stats Section
         item {
             VerificationRateCard(
-                summary = summary,
-                onSampleClick = { viewModel.populateSampleData() }
+                summary = summary
             )
         }
 
@@ -240,10 +239,6 @@ fun DashboardScreen(
                             style = MaterialTheme.typography.bodyLarge,
                             fontWeight = FontWeight.Medium
                         )
-                        Spacer(modifier = Modifier.height(12.dp))
-                        Button(onClick = { viewModel.populateSampleData() }) {
-                            Text("دریافت داده‌های آزمایش اولیه")
-                        }
                     }
                 }
             }
@@ -448,8 +443,7 @@ fun QuickActionButton(
 
 @Composable
 fun VerificationRateCard(
-    summary: DashboardSummary,
-    onSampleClick: () -> Unit
+    summary: DashboardSummary
 ) {
     Card(
         modifier = Modifier.fillMaxWidth(),
@@ -802,7 +796,7 @@ fun AddTransactionSheet(
 }
 
 fun formatNumber(number: Long): String {
-    val formatter = NumberFormat.getInstance(Locale("fa", "IR"))
+    val formatter = NumberFormat.getInstance(Locale.Builder().setLanguage("fa").setRegion("IR").build())
     return formatter.format(number)
 }
 

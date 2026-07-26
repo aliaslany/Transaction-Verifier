@@ -66,12 +66,20 @@ class TelegramSender(private val prefsManager: UserPreferencesManager) {
                 Pair(false, "خطا در تلگرام: ${response.body()?.description ?: response.message()}")
             }
         } catch (e: Exception) {
-            Pair(false, "خطای شبکه: ${e.localizedMessage ?: "عدم اتصال به اینترنت"}")
+            val errorMsg = e.localizedMessage ?: "عدم اتصال"
+            val friendlyMsg = if (errorMsg.contains("UnknownHostException") || errorMsg.contains("Failed to connect") || errorMsg.contains("timeout")) {
+                "خطا: مشکل در اتصال به اینترنت یا فیلترینگ تلگرام (نیاز به VPN/پروکسی)."
+            } else if (errorMsg.contains("Malformed URL") || errorMsg.contains("invalid token") || errorMsg.contains("HTTP 401") || errorMsg.contains("Unauthorized")) {
+                "خطا: توکن ربات تلگرام نامعتبر است. لطفاً توکن را بررسی کنید."
+            } else {
+                "خطای ارتباطی: $errorMsg"
+            }
+            Pair(false, friendlyMsg)
         }
     }
 
     private fun formatTransactionMessage(tx: TransactionEntity): String {
-        val formatter = NumberFormat.getInstance(Locale("fa", "IR"))
+        val formatter = NumberFormat.getInstance(Locale.Builder().setLanguage("fa").setRegion("IR").build())
         val amountFormattedToman = formatter.format(tx.amountToman)
         val amountFormattedRial = formatter.format(tx.amountRial)
         val dateStr = formatTimestamp(tx.timestamp)

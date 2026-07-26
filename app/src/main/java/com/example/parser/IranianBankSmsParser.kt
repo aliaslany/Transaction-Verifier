@@ -110,7 +110,7 @@ object IranianBankSmsParser {
 
     private fun extractSmsRef(text: String): String {
         val patterns = listOf(
-            Pattern.compile("(?:پیگیری|پیگیر|رهگیری|مرجع|ارجاع|شناسه|Ref|RRN)\\s*[:=]?\\s*([a-zA-Z0-9]{4,16})", Pattern.CASE_INSENSITIVE),
+            Pattern.compile("(?:پیگیری|پیگیر|رهگیری|مرجع|ارجاع|شناسه|کد|Ref|RRN)\\s*[:=]?\\s*([a-zA-Z0-9]{4,16})", Pattern.CASE_INSENSITIVE),
             Pattern.compile("\\b(\\d{6,12})\\b")
         )
 
@@ -128,7 +128,7 @@ object IranianBankSmsParser {
 
     private fun extractAccountOrCard(text: String): String {
         // e.g. "به حساب ...1234" or "از کارت ...5678"
-        val pattern = Pattern.compile("(?:حساب|کارت)\\s*[:=]?\\s*([\\d*-]{4,19})")
+        val pattern = Pattern.compile("(?:حساب|کارت)\\s*[:=]?\\s*([\\d*\\-.]{4,19})")
         val matcher = pattern.matcher(text)
         if (matcher.find()) {
             return matcher.group(1) ?: ""
