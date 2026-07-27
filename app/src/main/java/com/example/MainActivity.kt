@@ -31,7 +31,7 @@ import androidx.compose.material.icons.filled.Dashboard
 import androidx.compose.material.icons.filled.Lock
 import androidx.compose.material.icons.filled.QrCodeScanner
 import androidx.compose.material.icons.filled.Receipt
-import androidx.compose.material.icons.filled.Send
+import androidx.compose.material.icons.automirrored.filled.Send
 import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material.icons.filled.Warning
 import androidx.compose.material3.Button
@@ -139,7 +139,7 @@ fun MainAppContent(viewModel: MainViewModel) {
         NavigationItem("dashboard", "داشبورد", Icons.Default.Dashboard),
         NavigationItem("verify", "تایید رسید", Icons.Default.QrCodeScanner),
         NavigationItem("transactions", "تراکنش‌ها", Icons.Default.Receipt),
-        NavigationItem("telegram", "API تلگرام", Icons.Default.Send),
+        NavigationItem("telegram", "API تلگرام", Icons.AutoMirrored.Filled.Send),
         NavigationItem("settings", "تنظیمات", Icons.Default.Settings)
     )
 
